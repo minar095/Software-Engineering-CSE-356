@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li id="auth-section"></li>
+    </ul>
+  </nav>
+  <main>
+    <h2>User Profile</h2>
+    <div id="profile-info"></div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Rental Home Management System</p>
+  </footer>
+  <script>
+    function checkUser() {
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      const authSection = document.getElementById("auth-section");
+
+      if (user) {
+        authSection.innerHTML = `
+          <span onclick="redirectToProfile()">${user.name}</span>
+          <button onclick="logout()">Logout</button>
+        `;
+      } else {
+        window.location.href = "login.html";
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+
+    function redirectToProfile() {
+      window.location.href = "profile.html";
+    }
+
+    function loadProfile() {
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      const profileInfo = document.getElementById("profile-info");
+
+      if (user) {
+        profileInfo.innerHTML = `
+          <p><strong>Name:</strong> ${user.name}</p>
+          <p><strong>Username:</strong> ${user.username}</p>
+          <p><strong>Email:</strong> ${user.email}</p>
+        `;
+      } else {
+        profileInfo.innerHTML = `<p>User not found. Please log in again.</p>`;
+      }
+    }
+
+    checkUser();
+    loadProfile();
+  </script>
+</body>
+</html>

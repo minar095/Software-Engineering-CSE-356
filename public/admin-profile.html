@@ -1,0 +1,121 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="admin-profile.html">Booked Users</a></li>
+      <li><button onclick="logout()">Logout</button></li>
+    </ul>
+  </nav>
+  <header>
+    <h3>Admin Panel - Booked Users</h3>
+  </header>
+  <main id="admin-content">
+    <h4>Total Booked Users: <span id="total-users"></span></h4>
+    <div id="user-list"></div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Rental Home Management System</p>
+  </footer>
+  <script>
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+
+    function loadBookedUsers() {
+      const bookedUsers = JSON.parse(localStorage.getItem("bookedUsers")) || [];
+      const totalUsers = document.getElementById("total-users");
+      const userList = document.getElementById("user-list");
+
+      totalUsers.textContent = bookedUsers.length;
+
+      if (bookedUsers.length === 0) {
+        userList.innerHTML = "<p>No users have booked properties.</p>";
+        return;
+      }
+
+      bookedUsers.forEach((user) => {
+        const userCard = document.createElement("div");
+        userCard.className = "user-card";
+        userCard.innerHTML = `
+          <h5>${user.name}</h5>
+          <p>Property: ${user.property.name}</p>
+          <p>Location: ${user.property.location}</p>
+          <p>Price: ${user.property.price}</p>
+        `;
+        userList.appendChild(userCard);
+      });
+    }
+
+    loadBookedUsers();
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#" id="logout-btn">Logout</a></li>
+    </ul>
+  </nav>
+  <header>
+    <h3>Admin Profile</h3>
+  </header>
+  <main>
+    <h4>Total Booked Users: <span id="total-booked-users">0</span></h4>
+    <ul id="booked-users-list"></ul>
+  </main>
+  <footer>
+    <p>&copy; 2025 Rental Home Management System</p>
+  </footer>
+  <script>
+    // Fetch logged-in user
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (!loggedInUser || !loggedInUser.isAdmin) {
+      alert("Access denied. Admins only.");
+      window.location.href = "index.html";
+    }
+
+    // Fetch bookings data
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+    // Count unique users who booked properties
+    const uniqueBookedUsers = [...new Set(bookings.map((b) => b.username))];
+    document.getElementById("total-booked-users").textContent = uniqueBookedUsers.length;
+
+    // Display a list of booked users
+    const bookedUsersList = document.getElementById("booked-users-list");
+    uniqueBookedUsers.forEach((username) => {
+      const userBookings = bookings.filter((b) => b.username === username);
+      const listItem = document.createElement("li");
+      listItem.textContent = `${username} - ${userBookings.length} properties booked`;
+      bookedUsersList.appendChild(listItem);
+    });
+
+    // Logout functionality
+    document.getElementById("logout-btn").addEventListener("click", function () {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

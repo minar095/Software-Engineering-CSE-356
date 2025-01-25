@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li id="auth-section"></li>
+    </ul>
+  </nav>
+  <main id="cart-container"></main>
+  <footer>
+    <p>&copy; 2025 Rental Home Management System</p>
+  </footer>
+  <script>
+    function checkUser() {
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      const authSection = document.getElementById("auth-section");
+
+      if (user) {
+        authSection.innerHTML = `
+          <img src="${user.profileImage}" alt="${user.name}" style="width:30px;border-radius:50%">
+          <span onclick="redirectToProfile()">${user.name}</span>
+          <button onclick="logout()">Logout</button>
+        `;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+
+    function redirectToProfile() {
+      window.location.href = "profile.html";
+    }
+
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const container = document.getElementById("cart-container");
+
+      if (cart.length === 0) {
+        alert("Cart is empty");
+        window.location.href = "index.html";
+        return;
+      }
+
+      container.innerHTML = `<h2>Your Booked Properties</h2>`;
+      cart.forEach((property, index) => {
+        const card = document.createElement("div");
+        card.className = "cart-card";
+        card.innerHTML = `
+          <img src="${property.img}" alt="${property.name}">
+          <h4>${property.name}</h4>
+          <p>Location: ${property.location}</p>
+          <p>Price: ${property.price}</p>
+          <p>Status: ${property.status}</p>
+          <button onclick="cancelBooking(${index})">Cancel Booking</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function cancelBooking(index) {
+      let cart = JSON.parse(localStorage.getItem("cart"));
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("Booking canceled!");
+      loadCart();
+    }
+
+    checkUser();
+    loadCart();
+  </script>
+</body>
+</html>

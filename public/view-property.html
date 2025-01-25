@@ -1,0 +1,154 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Property</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li id="auth-section"></li>
+    </ul>
+  </nav>
+  <main id="property-details"></main>
+  <footer>
+    <p>&copy; 2025 Rental Home Management System</p>
+  </footer>
+  <script>
+    function checkUser() {
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      const authSection = document.getElementById("auth-section");
+
+      if (user) {
+        authSection.innerHTML = `
+          <span onclick="redirectToProfile()">${user.name}</span>
+          <button onclick="logout()">Logout</button>
+        `;
+      } else {
+        window.location.href = "login.html";
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+
+    function redirectToProfile() {
+      window.location.href = "profile.html";
+    }
+
+    function loadPropertyDetails() {
+      const property = JSON.parse(localStorage.getItem("selectedProperty"));
+      const container = document.getElementById("property-details");
+
+      if (property) {
+        container.innerHTML = `
+          <img src="${property.img}" alt="${property.name}">
+          <h2>${property.name}</h2>
+          <p><strong>Location:</strong> ${property.location}</p>
+          <p><strong>Price:</strong> ${property.price}</p>
+          <button onclick="bookProperty()">Book Property</button>
+        `;
+      } else {
+        container.innerHTML = `<p>Property not found. Please go back to the homepage.</p>`;
+      }
+    }
+
+    function bookProperty() {
+      const property = JSON.parse(localStorage.getItem("selectedProperty"));
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      cart.push({ ...property, status: "Booked" });
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      alert("Booked successfully!");
+      window.location.href = "index.html";
+    }
+
+    checkUser();
+    loadPropertyDetails();
+  </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Property</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="#" id="logout-btn">Logout</a></li>
+    </ul>
+  </nav>
+  <main>
+    <div id="property-details">
+      <!-- Property details will be dynamically populated -->
+    </div>
+    <button id="book-property">Book Property</button>
+  </main>
+  <footer>
+    <p>&copy; 2025 Rental Home Management System</p>
+  </footer>
+  <script>
+    // Fetch logged-in user
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (!loggedInUser) {
+      alert("Please log in first.");
+      window.location.href = "login.html";
+    }
+
+    // Fetch selected property data
+    const propertyData = JSON.parse(localStorage.getItem("selectedProperty"));
+    if (!propertyData) {
+      alert("No property selected.");
+      window.location.href = "index.html";
+    }
+
+    // Populate property details
+    const propertyDetailsDiv = document.getElementById("property-details");
+    propertyDetailsDiv.innerHTML = `
+      <h3>${propertyData.name}</h3>
+      <p><strong>Location:</strong> ${propertyData.location}</p>
+      <p><strong>Price:</strong> $${propertyData.price} / month</p>
+      <img src="${propertyData.img}" alt="${propertyData.name}" />
+    `;
+
+    // Handle booking
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    document.getElementById("book-property").addEventListener("click", function () {
+      const booking = {
+        username: loggedInUser.username,
+        propertyName: propertyData.name,
+        location: propertyData.location,
+        price: propertyData.price,
+        status: "Booked",
+      };
+
+      bookings.push(booking);
+      localStorage.setItem("bookings", JSON.stringify(bookings));
+
+      alert("Booked Successfully!");
+      window.location.href = "index.html";
+    });
+
+    // Logout functionality
+    document.getElementById("logout-btn").addEventListener("click", function () {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rental Home Management System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li id="auth-section"></li>
+    </ul>
+    <input type="text" id="search-input" placeholder="Search by location" oninput="filterProperties()">
+  </nav>
+  <header>
+    <h3>Explore Properties</h3>
+  </header>
+  <main id="properties-container"></main>
+  <footer>
+    <p>&copy; 2025 Rental Home Management System</p>
+  </footer>
+  <script>
+    const fakeProperties = [
+      { id: 1, name: "Sunset Villa", location: "California", price: "$2000/month", img: "https://via.placeholder.com/150" },
+      { id: 2, name: "Ocean Breeze", location: "Florida", price: "$1500/month", img: "https://via.placeholder.com/150" },
+      { id: 3, name: "Mountain Retreat", location: "Colorado", price: "$2500/month", img: "https://via.placeholder.com/150" },
+      { id: 4, name: "Urban Loft", location: "New York", price: "$3000/month", img: "https://via.placeholder.com/150" },
+      { id: 5, name: "Cozy Cottage", location: "Texas", price: "$1800/month", img: "https://via.placeholder.com/150" },
+      { id: 6, name: "Downtown Apartment", location: "Illinois", price: "$2200/month", img: "https://via.placeholder.com/150" },
+      { id: 7, name: "Beachfront Condo", location: "Hawaii", price: "$3500/month", img: "https://via.placeholder.com/150" },
+      { id: 8, name: "Country House", location: "Kentucky", price: "$1700/month", img: "https://via.placeholder.com/150" },
+      { id: 9, name: "Lake House", location: "Michigan", price: "$2600/month", img: "https://via.placeholder.com/150" },
+      { id: 10, name: "Garden Estate", location: "Georgia", price: "$4000/month", img: "https://via.placeholder.com/150" }
+    ];
+
+    function initializeProperties() {
+      if (!localStorage.getItem("properties")) {
+        localStorage.setItem("properties", JSON.stringify(fakeProperties));
+      }
+    }
+
+    function checkUser() {
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      const authSection = document.getElementById("auth-section");
+
+      if (user) {
+        authSection.innerHTML = `
+          <span onclick="redirectToProfile()">${user.name}</span>
+          <button onclick="logout()">Logout</button>
+        `;
+      } else {
+        authSection.innerHTML = `<a href="login.html">Login</a>`;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+
+    function redirectToProfile() {
+      window.location.href = "profile.html";
+    }
+
+    function loadProperties() {
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      const container = document.getElementById("properties-container");
+      const properties = JSON.parse(localStorage.getItem("properties")) || [];
+
+      if (!user) {
+        container.innerHTML = `<p>Please <a href="login.html">login</a> to explore properties.</p>`;
+        return;
+      }
+
+      if (properties.length === 0) {
+        container.innerHTML = `<p>No properties available.</p>`;
+        return;
+      }
+
+      properties.forEach((property) => {
+        const card = document.createElement("div");
+        card.className = "property-card";
+        card.innerHTML = `
+          <img src="${property.img}" alt="${property.name}">
+          <h4>${property.name}</h4>
+          <p>Location: ${property.location}</p>
+          <p>Price: ${property.price}</p>
+          <button onclick="viewProperty(${property.id})">View Property</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function viewProperty(id) {
+      const properties = JSON.parse(localStorage.getItem("properties")) || [];
+      const selectedProperty = properties.find((p) => p.id === id);
+      if (selectedProperty) {
+        localStorage.setItem("selectedProperty", JSON.stringify(selectedProperty));
+        window.location.href = "view-property.html";
+      }
+    }
+
+    function filterProperties() {
+      const query = document.getElementById("search-input").value.toLowerCase();
+      const properties = JSON.parse(localStorage.getItem("properties")) || [];
+      const container = document.getElementById("properties-container");
+
+      const filtered = properties.filter((property) =>
+        property.location.toLowerCase().includes(query)
+      );
+
+      container.innerHTML = "";
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <h4>No property found</h4>
+          <button onclick="window.location.href='index.html'">Return to Home</button>
+        `;
+        return;
+      }
+
+      filtered.forEach((property) => {
+        const card = document.createElement("div");
+        card.className = "property-card";
+        card.innerHTML = `
+          <img src="${property.img}" alt="${property.name}">
+          <h4>${property.name}</h4>
+          <p>Location: ${property.location}</p>
+          <p>Price: ${property.price}</p>
+          <button onclick="viewProperty(${property.id})">View Property</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    initializeProperties();
+    checkUser();
+    loadProperties();
+  </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rental Home Management System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li id="auth-section"></li>
+      <li id="admin-section"></li>
+    </ul>
+    <input type="text" id="search-input" placeholder="Search by location" oninput="filterProperties()">
+  </nav>
+  <header>
+    <h3>Explore Properties</h3>
+  </header>
+  <main id="properties-container"></main>
+  <footer>
+    <p>&copy; 2025 Rental Home Management System</p>
+  </footer>
+  <script>
+    const fakeProperties = [
+    { id: 1, name: "Sunset Villa", location: "California", price: "$2000/month", img: "https://via.placeholder.com/150" },
+    { id: 2, name: "Ocean Breeze", location: "Florida", price: "$1500/month", img: "https://via.placeholder.com/150" },
+    { id: 3, name: "Mountain Retreat", location: "Colorado", price: "$2500/month", img: "https://via.placeholder.com/150" },
+    { id: 4, name: "Urban Loft", location: "New York", price: "$3000/month", img: "https://via.placeholder.com/150" },
+    { id: 5, name: "Cozy Cottage", location: "Texas", price: "$1800/month", img: "https://via.placeholder.com/150" },
+    { id: 6, name: "Downtown Apartment", location: "Illinois", price: "$2200/month", img: "https://via.placeholder.com/150" },
+    { id: 7, name: "Beachfront Condo", location: "Hawaii", price: "$3500/month", img: "https://via.placeholder.com/150" },
+    { id: 8, name: "Country House", location: "Kentucky", price: "$1700/month", img: "https://via.placeholder.com/150" },
+    { id: 9, name: "Lake House", location: "Michigan", price: "$2600/month", img: "https://via.placeholder.com/150" },
+    { id: 10, name: "Garden Estate", location: "Georgia", price: "$4000/month", img: "https://via.placeholder.com/150" }
+      // More properties...
+    ];
+
+    function initializeProperties() {
+      if (!localStorage.getItem("properties")) {
+        localStorage.setItem("properties", JSON.stringify(fakeProperties));
+      }
+    }
+
+    function checkUser() {
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      const authSection = document.getElementById("auth-section");
+
+      if (user) {
+        authSection.innerHTML = `
+          <span onclick="redirectToProfile()">${user.name}</span>
+          <button onclick="logout()">Logout</button>
+        `;
+        if (user.isAdmin) {
+          document.getElementById("admin-section").innerHTML = `<a href="admin-profile.html">Booked Users</a>`;
+        }
+      } else {
+        authSection.innerHTML = `<a href="login.html">Login</a>`;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+
+    function redirectToProfile() {
+      window.location.href = "profile.html";
+    }
+
+    function loadProperties() {
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      const container = document.getElementById("properties-container");
+      const properties = JSON.parse(localStorage.getItem("properties")) || [];
+
+      if (!user) {
+        container.innerHTML = `<p>Please <a href="login.html">login</a> to explore properties.</p>`;
+        return;
+      }
+
+      if (properties.length === 0) {
+        container.innerHTML = `<p>No properties available.</p>`;
+        return;
+      }
+
+      properties.forEach((property) => {
+        const card = document.createElement("div");
+        card.className = "property-card";
+        card.innerHTML = `
+          <img src="${property.img}" alt="${property.name}">
+          <h4>${property.name}</h4>
+          <p>Location: ${property.location}</p>
+          <p>Price: ${property.price}</p>
+          <button onclick="viewProperty(${property.id})">View Property</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterProperties() {
+      const query = document.getElementById("search-input").value.toLowerCase();
+      const properties = JSON.parse(localStorage.getItem("properties")) || [];
+      const container = document.getElementById("properties-container");
+
+      const filtered = properties.filter((property) =>
+        property.location.toLowerCase().includes(query)
+      );
+
+      container.innerHTML = "";
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <h4>No property found</h4>
+          <button onclick="window.location.href='index.html'">Return to Home</button>
+        `;
+        return;
+      }
+
+      filtered.forEach((property) => {
+        const card = document.createElement("div");
+        card.className = "property-card";
+        card.innerHTML = `
+          <img src="${property.img}" alt="${property.name}">
+          <h4>${property.name}</h4>
+          <p>Location: ${property.location}</p>
+          <p>Price: ${property.price}</p>
+          <button onclick="viewProperty(${property.id})">View Property</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function viewProperty(id) {
+      const properties = JSON.parse(localStorage.getItem("properties")) || [];
+      const selectedProperty = properties.find((p) => p.id === id);
+      if (selectedProperty) {
+        localStorage.setItem("selectedProperty", JSON.stringify(selectedProperty));
+        window.location.href = "view-property.html";
+      }
+    }
+
+    initializeProperties();
+    checkUser();
+    loadProperties();
+  </script>
+</body>
+</html>
