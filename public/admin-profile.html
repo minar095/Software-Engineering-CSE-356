@@ -1,92 +1,88 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Profile</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="cart.html">Cart</a></li>
-      <li><a href="profile.html">Profile</a></li>
-      <li><a href="admin-profile.html">Booked Users</a></li>
-      <li><button onclick="logout()">Logout</button></li>
-    </ul>
-  </nav>
-  <header>
-    <h3>Admin Panel - Booked Users</h3>
-  </header>
-  <main id="admin-content">
-    <h4>Total Booked Users: <span id="total-users"></span></h4>
-    <div id="user-list"></div>
-  </main>
-  <footer>
-    <p>&copy; 2025 Rental Home Management System</p>
-  </footer>
-  <script>
-    function logout() {
-      localStorage.removeItem("loggedInUser");
-      window.location.href = "index.html";
-    }
-
-    function loadBookedUsers() {
-      const bookedUsers = JSON.parse(localStorage.getItem("bookedUsers")) || [];
-      const totalUsers = document.getElementById("total-users");
-      const userList = document.getElementById("user-list");
-
-      totalUsers.textContent = bookedUsers.length;
-
-      if (bookedUsers.length === 0) {
-        userList.innerHTML = "<p>No users have booked properties.</p>";
-        return;
-      }
-
-      bookedUsers.forEach((user) => {
-        const userCard = document.createElement("div");
-        userCard.className = "user-card";
-        userCard.innerHTML = `
-          <h5>${user.name}</h5>
-          <p>Property: ${user.property.name}</p>
-          <p>Location: ${user.property.location}</p>
-          <p>Price: ${user.property.price}</p>
-        `;
-        userList.appendChild(userCard);
-      });
-    }
-
-    loadBookedUsers();
-  </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    .poppins {
+      font-family: "Poppins", serif;
+    }
+  </style>
   <title>Admin Profile</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <nav>
-    <ul>
+
+<body class="container mx-auto poppins">
+  <nav class="flex justify-between mt-5 items-center">
+    <a class=" font-extrabold text-4xl" href="index.html">Rental</a>
+    <ul class="flex justify-between gap-5 items-center ">
       <li><a href="index.html">Home</a></li>
       <li><a href="#" id="logout-btn">Logout</a></li>
     </ul>
   </nav>
-  <header>
-    <h3>Admin Profile</h3>
+  <header class="mt-20">
+    <h3 class="text-3xl font-bold text-center">Admin Profile Information</h3>
   </header>
-  <main>
+  <main class="m-20 mx-auto text-white bg-gray-700 text-center space-y-4 py-4 rounded-lg">
     <h4>Total Booked Users: <span id="total-booked-users">0</span></h4>
     <ul id="booked-users-list"></ul>
   </main>
-  <footer>
-    <p>&copy; 2025 Rental Home Management System</p>
+  <!-- Footer -->
+
+  <footer class="bg-gray-100 py-8 w-full mt-20">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <div>
+          <h6 class="font-bold text-gray-800 mb-4">Products</h6>
+          <ul class="text-gray-600 space-y-2">
+            <li><a href="#" class="hover:text-gray-800">House</a></li>
+            <li><a href="#" class="hover:text-gray-800">Apartments</a></li>
+            <li><a href="#" class="hover:text-gray-800">Condos</a></li>
+            <li><a href="#" class="hover:text-gray-800">Villas</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h6 class="font-bold text-gray-800 mb-4">Links</h6>
+          <ul class="text-gray-600 space-y-2">
+            <li><a href="#" class="hover:text-gray-800">About Us</a></li>
+            <li><a href="#" class="hover:text-gray-800">Resources</a></li>
+            <li><a href="#" class="hover:text-gray-800">FAQ</a></li>
+            <li><a href="#" class="hover:text-gray-800">Login | Sign-Up</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h6 class="font-bold text-gray-800 mb-4">Contact Us</h6>
+          <ul class="text-gray-600 space-y-2">
+            <li>2464 Royal Ln. Nairobi, Eastleigh 45463</li>
+            <li>(+254)-706328544</li>
+            <li>Info @i-tus.com</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="mt-8 pt-8 border-t border-gray-200 text-center text-gray-600">
+        <p>&copy; 2025 Rental Home Management System</p>
+        <div class="mt-4 flex justify-center space-x-6">
+          <a href="#" class="hover:text-gray-800">Terms And Conditions</a>
+          <a href="#" class="hover:text-gray-800">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
   </footer>
+
+  <!-- Footer -->
   <script>
     // Fetch logged-in user
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -118,4 +114,5 @@
     });
   </script>
 </body>
+
 </html>

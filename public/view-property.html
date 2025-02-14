@@ -1,106 +1,88 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>View Property</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="cart.html">Cart</a></li>
-      <li id="auth-section"></li>
-    </ul>
-  </nav>
-  <main id="property-details"></main>
-  <footer>
-    <p>&copy; 2025 Rental Home Management System</p>
-  </footer>
-  <script>
-    function checkUser() {
-      const user = JSON.parse(localStorage.getItem("loggedInUser"));
-      const authSection = document.getElementById("auth-section");
-
-      if (user) {
-        authSection.innerHTML = `
-          <span onclick="redirectToProfile()">${user.name}</span>
-          <button onclick="logout()">Logout</button>
-        `;
-      } else {
-        window.location.href = "login.html";
-      }
-    }
-
-    function logout() {
-      localStorage.removeItem("loggedInUser");
-      window.location.href = "index.html";
-    }
-
-    function redirectToProfile() {
-      window.location.href = "profile.html";
-    }
-
-    function loadPropertyDetails() {
-      const property = JSON.parse(localStorage.getItem("selectedProperty"));
-      const container = document.getElementById("property-details");
-
-      if (property) {
-        container.innerHTML = `
-          <img src="${property.img}" alt="${property.name}">
-          <h2>${property.name}</h2>
-          <p><strong>Location:</strong> ${property.location}</p>
-          <p><strong>Price:</strong> ${property.price}</p>
-          <button onclick="bookProperty()">Book Property</button>
-        `;
-      } else {
-        container.innerHTML = `<p>Property not found. Please go back to the homepage.</p>`;
-      }
-    }
-
-    function bookProperty() {
-      const property = JSON.parse(localStorage.getItem("selectedProperty"));
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-      cart.push({ ...property, status: "Booked" });
-      localStorage.setItem("cart", JSON.stringify(cart));
-
-      alert("Booked successfully!");
-      window.location.href = "index.html";
-    }
-
-    checkUser();
-    loadPropertyDetails();
-  </script>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    .poppins {
+      font-family: "Poppins", serif;
+    }
+  </style>
   <title>View Property</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <nav>
-    <ul>
+
+<body class="container mx-auto poppins">
+
+  <nav class="flex  mt-5 items-center">
+    <a class=" font-extrabold text-4xl flex-1" href="index.html">Rental</a>
+    <ul class="flex-2 flex justify-center gap-5 items-center ">
       <li><a href="index.html">Home</a></li>
       <li><a href="profile.html">Profile</a></li>
       <li><a href="#" id="logout-btn">Logout</a></li>
     </ul>
   </nav>
-  <main>
-    <div id="property-details">
+
+  <h3 class='text-4xl mt-10 text-center'>Property Details</h3>
+  <main class="mt-5 text-center">
+    <div class="flex flex-col justify-center items-center gap-3" id="property-details">
       <!-- Property details will be dynamically populated -->
+
     </div>
-    <button id="book-property">Book Property</button>
+
+    <button class="bg-[#234B9A] text-white px-3 py-2 rounded-md mt-2" id="book-property">Book Property</button>
   </main>
-  <footer>
-    <p>&copy; 2025 Rental Home Management System</p>
+  <footer class="bg-gray-100 py-8 w-full mt-20">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <div>
+          <h6 class="font-bold text-gray-800 mb-4">Products</h6>
+          <ul class="text-gray-600 space-y-2">
+            <li><a href="#" class="hover:text-gray-800">House</a></li>
+            <li><a href="#" class="hover:text-gray-800">Apartments</a></li>
+            <li><a href="#" class="hover:text-gray-800">Condos</a></li>
+            <li><a href="#" class="hover:text-gray-800">Villas</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h6 class="font-bold text-gray-800 mb-4">Links</h6>
+          <ul class="text-gray-600 space-y-2">
+            <li><a href="#" class="hover:text-gray-800">About Us</a></li>
+            <li><a href="#" class="hover:text-gray-800">Resources</a></li>
+            <li><a href="#" class="hover:text-gray-800">FAQ</a></li>
+            <li><a href="#" class="hover:text-gray-800">Login | Sign-Up</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h6 class="font-bold text-gray-800 mb-4">Contact Us</h6>
+          <ul class="text-gray-600 space-y-2">
+            <li>2464 Royal Ln. Nairobi, Eastleigh 45463</li>
+            <li>(+254)-706328544</li>
+            <li>Info @i-tus.com</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="mt-8 pt-8 border-t border-gray-200 text-center text-gray-600">
+        <p>&copy; 2025 Rental Home Management System</p>
+        <div class="mt-4 flex justify-center space-x-6">
+          <a href="#" class="hover:text-gray-800">Terms And Conditions</a>
+          <a href="#" class="hover:text-gray-800">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
   </footer>
   <script>
     // Fetch logged-in user
@@ -120,10 +102,11 @@
     // Populate property details
     const propertyDetailsDiv = document.getElementById("property-details");
     propertyDetailsDiv.innerHTML = `
+     
+     <img src="${propertyData.img}" alt="${propertyData.name}" />
       <h3>${propertyData.name}</h3>
       <p><strong>Location:</strong> ${propertyData.location}</p>
-      <p><strong>Price:</strong> $${propertyData.price} / month</p>
-      <img src="${propertyData.img}" alt="${propertyData.name}" />
+      <p><strong>Price:</strong> ${propertyData.price} / month</p>
     `;
 
     // Handle booking
@@ -151,4 +134,5 @@
     });
   </script>
 </body>
+
 </html>
