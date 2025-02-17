@@ -11,7 +11,7 @@ const fakeProperties = [
   { id: 10, name: "Garden Estate", location: "Georgia", price: "$4000/month", img: "https://via.placeholder.com/150" }
 ];
 
-// Adding an admin in the local storage
+// Adding an admin in the local storage gybybbyububy
 // 1. Open your browser's developer tools (usually F12 or Ctrl+Shift+I) and go to the Console tab.
 // 2. Run the following JavaScript code to add an admin user to the localStorage:
 
