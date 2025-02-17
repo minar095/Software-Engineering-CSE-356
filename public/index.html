@@ -35,13 +35,10 @@
       placeholder="Search by location" oninput="filterProperties()">
   </nav>
 
-
   <header> </header>
   <main class="" id="properties-container"> </main>
 
-
   <!-- Footer -->
-
   <footer class="bg-gray-100 py-8 w-full mt-20">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -87,21 +84,20 @@
     </div>
   </footer>
 
-  <!-- Footer -->
   <script>
     
     const fakeProperties = [
-      { id: 1, name: "Sunset Villa", location: "California", price: "$2000/month", img: './pics/Rectangle 129.png' },
-      { id: 2, name: "Ocean Breeze", location: "Florida", price: "$1500/month", img: './pics/Rectangle 125.png' },
-      { id: 3, name: "Mountain Retreat", location: "Colorado", price: "$2500/month", img: './pics/Rectangle 121.png' },
-      { id: 4, name: "Urban Loft", location: "New York", price: "$3000/month", img: "https://via.placeholder.com/150" },
-      { id: 5, name: "Cozy Cottage", location: "Texas", price: "$1800/month", img: "https://via.placeholder.com/150" },
-      { id: 6, name: "Downtown Apartment", location: "Illinois", price: "$2200/month", img: "https://via.placeholder.com/150" },
-      { id: 7, name: "Beachfront Condo", location: "Hawaii", price: "$3500/month", img: "https://via.placeholder.com/150" },
-      { id: 8, name: "Country House", location: "Kentucky", price: "$1700/month", img: "https://via.placeholder.com/150" },
-      { id: 9, name: "Lake House", location: "Michigan", price: "$2600/month", img: "https://via.placeholder.com/150" },
-      { id: 10, name: "Garden Estate", location: "Georgia", price: "$4000/month", img: "https://via.placeholder.com/150" }
-      // More properties...
+      
+      { id: 1, name: "Sunset Villa", location: "California", price: "$2000/month", img: "./pics/Rectangle_121.png" ,},
+      { id: 2, name: "Ocean Breeze", location: "Florida", price: "$1500/month", img: './pics/Rectangle_125.png' },
+      { id: 3, name: "Mountain Retreat", location: "Colorado", price: "$2500/month", img: './pics/Rectangle_121.png' },
+      { id: 4, name: "Urban Loft", location: "New York", price: "$3000/month", img: './pics/Rectangle_129.png' },
+      { id: 5, name: "Cozy Cottage", location: "Texas", price: "$1800/month", img: './pics/Rectangle_125.png' },
+      { id: 6, name: "Downtown Apartment", location: "Illinois", price: "$2200/month", img: './pics/Rectangle_121.png' },
+      { id: 7, name: "Beachfront Condo", location: "Hawaii", price: "$3500/month", img: './pics/Rectangle_129.png' },
+      { id: 8, name: "Country House", location: "Kentucky", price: "$1700/month", img: './pics/Rectangle_125.png' },
+      { id: 9, name: "Lake House", location: "Michigan", price: "$2600/month", img: './pics/Rectangle_121.png' },
+      { id: 10, name: "Garden Estate", location: "Georgia", price: "$4000/month", img: './pics/Rectangle_129.png' },
     ];
 
     function initializeProperties() {
@@ -143,60 +139,40 @@
 
       if (!user) {
         container.innerHTML = `
-        
-         <!-- Banner -->
-
-    <div class="relative h-[400px] md:h-[500px] lg:h-[600px] flex mt-10">
-
-      <div class="w-1/2 flex flex-col  justify-center gap-4  text-black">
-        <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-          Find Your Perfect Rental Property
-        </h1>
-        <p class="text-base md:text-lg lg:text-xl mb-8">
-          A Great Platform to Connect users Directly with Property Managers and Discover Your Dream Home
-        </p>
-
-
-        <button class=" block bg-[#234B9A] w-fit hover:bg-blue-700 text-white py-2 px-5 rounded-lg text-lg">
-          Get started
-        </button>
-
-      </div>
-
-      <div class="w-1/2 bg-cover bg-center" style="background-image: url('/public/pics/Group\ 8.png');"></div>
-    </div>
-
-    <!-- Banner -->
-
-    <!-- second banner -->
-
-    <div class="bg-white py-12">
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-
-          <div class="md:w-1/2 ">
-            <img src="/public/pics/Rectangle 7.png" alt="Rental Home" class="rounded-lg overflow-hidden shadow-lg">
-          </div>
-
-          <div class="md:w-1/2 text-left md:text-left">
-            <h2 class="text-3xl font-bold mb-4">What We Do</h2>
-            <h3 class="text-2xl font-semibold mb-4">We Simplify Your Rental <br /> Home Search</h3>
-            <p class="text-gray-700 leading-relaxed">
-              Experience hassle-free rental home searching <br />
-              with our platform. We simplify the process by <br />
-              linking you directly to legit property managers <br />
-              by cutting out the middleman.
+        <div class="relative h-[400px] md:h-[500px] lg:h-[600px] flex mt-10">
+          <div class="w-1/2 flex flex-col  justify-center gap-4  text-black">
+            <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+              Find Your Perfect Rental Property
+            </h1>
+            <p class="text-base md:text-lg lg:text-xl mb-8">
+              A Great Platform to Connect users Directly with Property Managers and Discover Your Dream Home
             </p>
+            <button class=" block bg-[#234B9A] w-fit hover:bg-blue-700 text-white py-2 px-5 rounded-lg text-lg">
+              Get started
+            </button>
           </div>
-
+          <div class="w-1/2 bg-cover bg-center" style="background-image: url('./pics/Group8.png');"></div>
         </div>
-      </div>
-    </div>
-    <!-- Second banner -->
-        
+        <div class="bg-white py-12">
+          <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+              <div class="md:w-1/2 ">
+                <img src="./pics/Rectangle7.png" alt="Rental Home" class="rounded-lg overflow-hidden shadow-lg">
+              </div>
+              <div class="md:w-1/2 text-left md:text-left">
+                <h2 class="text-3xl font-bold mb-4">What We Do</h2>
+                <h3 class="text-2xl font-semibold mb-4">We Simplify Your Rental <br /> Home Search</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Experience hassle-free rental home searching <br />
+                  with our platform. We simplify the process by <br />
+                  linking you directly to legit property managers <br />
+                  by cutting out the middleman.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
         <p>Please <a href="login.html">login</a> to explore properties.</p>
-        
-        
         `;
         return;
       }
